@@ -1,0 +1,48 @@
+{% extends "layout.html" %} {% block content %}
+
+<script
+  type="text/javascript"
+  src="{{ url_for('static', filename = 'add.js') }}"
+></script>
+<script>
+  let books = {{books|tojson}}
+</script>
+<script>
+  let current_id = {{current_id|tojson}}
+</script>
+<div id="book_container">
+<b>Fill in information for a new book here: </b>
+<div class="col-2">
+  <input type="text" id="new_title" placeholder="Title"></input>
+</div>
+<div class="col-2">
+  <input type="text" id="new_author" placeholder="Author"></input>
+</div>
+<div class="col-2"><input type="text" id="new_image" placeholder="Image URL"></input>
+</div>
+<div class="col-2"><input type="text" id="new_alt" placeholder="Alt text"></input>
+</div>
+<div class="col-2">
+<input type="text" id="new_year" placeholder="Year"></input>
+</div>
+<div class="col-2">
+<input type="text" id="new_summary" placeholder="Summary"></input>
+</div>
+<div class="col-2">
+<input type="text" id="new_score" placeholder="Score"></input>
+</div>
+<div class="col-2">
+<input type="text" id="new_pages" placeholder="Pages"></input>
+</div>
+<div class="col-2">
+<input type="text" id="new_similar" placeholder="Similar"></input>
+</div>
+<div class="col-2">
+    <button id="submitButton" class="btn btn-primary" input type="button">Submit</button>
+</div>
+<div id= "dialog2">Do you want to see the new item?</div> 
+</div>
+    
+
+
+{% endblock %}

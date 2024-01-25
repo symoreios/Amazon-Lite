@@ -1,0 +1,124 @@
+#header {
+  background-color: darkgray;
+  text-align: left;
+  padding: 90px;
+}
+h1 {
+  font-size: 55px;
+}
+#search_button {
+  z-index: 50;
+}
+
+#container {
+  width: 1250px;
+}
+.deleteButton {
+  font-size: 20px;
+  background-color: yellow();
+}
+#updates {
+  padding-top: 20px;
+  width: 1260px;
+}
+.div1 {
+  width: 3000px;
+}
+#search_bar {
+  width: 500px;
+}
+#new_title {
+  width: 250px;
+}
+#new_author {
+  width: 250px;
+}
+#new_image {
+  width: 700px;
+}
+#new_year {
+  width: 100px;
+}
+#new_summary {
+  width: 700px;
+}
+#new_score {
+  width: 50px;
+}
+#new_pages {
+  width: 200px;
+}
+#new_similar {
+  width: 700px;
+}
+#most_popular_container {
+  width: 1000px;
+  padding-left: 12px;
+  color: red;
+  /* background-color: rgb(179, 33, 33);
+  text */
+}
+
+/* #main_body {
+  background-color: purple;
+} */
+
+body {
+  background-color: rgb(245, 239, 239);
+}
+#add_book_button {
+  background-color: red;
+}
+#search_button {
+  background-color: red;
+  /* color: red; */
+}
+#home_button {
+  background-color: red;
+}
+#all_search_results {
+  background-color: rgb(95, 226, 226);
+}
+
+#most_popular_container {
+  background-color: rgb(95, 226, 226);
+}
+
+#book_container {
+  background-color: rgb(95, 226, 226);
+}
+.navbar-expand-lg {
+  background-color: rgb(141, 140, 140);
+  color: yellow;
+}
+/* .summaries {
+  margin: auto;
+  width: 50%;
+}
+/* .title_result {
+  background-color: red;
+} */
+/* .authors {
+  margin: auto;
+  width: 20%; 
+} */
+.red_button {
+  color: black;
+  background-color: red;
+}
+#editButton {
+  color: black;
+  background-color: red;
+}
+#changeButton {
+  color: black;
+  background-color: red;
+}
+#discardButton {
+  color: black;
+  background-color: red;
+}
+#submitButton {
+  color: black;
+  background-color: red;
+}

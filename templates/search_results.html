@@ -1,0 +1,74 @@
+{% extends "layout.html" %} {% block content %}
+<script>
+  let books = {{books|tojson}}
+  let search_for = {{search_for|tojson}}
+</script>
+<script
+  type="text/javascript"
+  src="{{ url_for('static', filename = 'search_results.js') }}"
+></script>
+<script>
+  $(document).ready(function () {
+    if (books.length == 0) {
+      $("#all_search_results").append("No results found");
+    } else {
+      let all_author_results = $("<div class='all_authors'>");
+      let all_title_results = $("<div class='all_titles'>");
+      let all_summary_results = $("<div class='summary_hits'>");
+      $.each(books, function (i, item) {
+        //   let summary_list = $("<div class='summaries'>");
+        let lower_case = item["summary"].toLowerCase();
+        let lower_search = search_for.toLowerCase();
+        x = lower_case.indexOf(lower_search);
+        let period = ".";
+        let index = lower_case.indexOf(period, x);
+        let z = item["summary"].substring(x, index + 1);
+        let summary_list = $(
+          "<div class='summaries'> <button class='red_button' input type='button'>" +
+            z +
+            "</button>"
+        );
+
+        let title_list = $(
+          "<div class='title_result'><button class='red_button' input type='button'>" +
+            item["title"] +
+            "</button>"
+        );
+        //  $(title_list).text(item["title"]);
+        let author_list = $(
+          "<div class='authors'>  <button class='red_button' input type='button'>" +
+            item["author"] +
+            "</button>"
+        );
+        //   $(author_list).text(item["author"]);
+        $("#all_search_results").append("<div>" + (i + 1) + "." + "</div>");
+        $("#all_search_results").append(" <b> Title: </b>");
+        $("#all_search_results").append(title_list);
+        $("#all_search_results").append(" <b> Author: </b>");
+        $("#all_search_results").append(author_list);
+        $("#all_search_results").append(" <b> Summary Snippet: </b>");
+        $("#all_search_results").append(summary_list);
+        $("#all_search_results").append("<hr>");
+        $(title_list).click(function (e) {
+          let item_id = item["id"];
+          window.location.href = "/view/" + item_id;
+        });
+
+        $(author_list).click(function (e) {
+          let item_id = item["id"];
+          window.location.href = "/view/" + item_id;
+        });
+
+        $(summary_list).click(function (e) {
+          let item_id = item["id"];
+          window.location.href = "/view/" + item_id;
+        });
+      });
+    }
+  });
+</script>
+
+<div class="title"><b>Search Results for "{{search_for}}":</b></div>
+<div>Number of Results: {{books|length}}</div>
+<div id="all_search_results"></div>
+{% endblock %}

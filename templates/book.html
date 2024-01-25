@@ -1,0 +1,40 @@
+{% extends "layout.html" %} {% block content %}
+
+<script
+  type="text/javascript"
+  src="{{ url_for('static', filename = 'search_results.js') }}"
+></script>
+
+<script>
+  let books = {{books|tojson}}
+</script>
+
+<div id="book_container">
+  <b>{{books.title}}</b>
+
+  <div>{{books.author}}</div>
+
+  <div><img src="{{books.image}}" alt="{{books.alt}}" /></div>
+  <div>Score: {{books.score}}</div>
+  <div>{{books.summary}}</div>
+  <div>Pages: {{books.pages}}</div>
+  <div>
+    Similar books:
+    <ul>
+      {% for similar in books.similar %}
+      <li>{{similar}}</li>
+      {% endfor %}
+    </ul>
+  </div>
+  <button id="editButton" class="btn btn-primary" input type="button">
+    Edit
+  </button>
+</div>
+<script>
+  $(document).ready(function(){
+    $("#editButton").click(function(){
+      window.location.replace("/edit/" + {{books.id}});
+    })
+  })
+</script>
+{% endblock %}

@@ -1,0 +1,129 @@
+{% extends "layout.html" %} {% block content %}
+<script>
+  let books = {{books|tojson}}
+</script>
+<script
+  type="text/javascript"
+  src="{{ url_for('static', filename = 'search_results.js') }}"
+></script>
+
+
+
+<div id="book_container">
+<div class="col-2">
+  <input type="text" id="new_title" value="{{books.title}}"></input>
+</div>
+<div class="col-2">
+  <input type="text" id="new_author" value="{{books.author}}"></input>
+</div>
+<div class="col-2">
+    <input type="text" id="new_image" value="{{books.image}}"></input>
+</div>
+<div class="col-2">
+  <input type="text" id="new_alt" value="{{books.alt}}"></input>
+</div>
+<div class="col-2">
+<input type="text" id="new_year" value="{{books.year}}"></input>
+</div>
+<div class="col-2">
+<input type="text" id="new_summary" value="{{books.summary}}"></input>
+</div>
+<div class="col-2">
+<input type="text" id="new_score" value="{{books.score}}"></input>
+</div>
+<div class="col-2">
+<input type="text" id="new_pages" value="{{books.pages}}"></input>
+</div>
+<div class="col-2">
+<input type="text" id="new_similar" value="{{books.similar}}"></input>
+</div>
+<div class="row">
+<div class="col-2">
+    <button id="changeButton" class="btn btn-primary" input type="button">Submit</button>
+</div>
+<div class="col-2">
+    <button id="discardButton" class="btn btn-primary" input type="button">Discard</button>
+</div>
+<div id = "dialog1" title="Confirmation"> Are you sure?</div>
+</div>
+</div>
+            
+        <script> $(document).ready(function(){
+   
+             let id = books["id"]
+             console.log(id)
+            $("#dialog1").dialog({
+                autoOpen: false,
+                buttons: {
+                    "Yes": function(){
+                        window.location.replace("/view/" + id);
+                    },
+                    "No": function(){
+                        $(this).dialog("close");
+                    }
+                }
+            })
+              $("#discardButton").click(function(){
+                $("#dialog1").dialog("open");
+              })
+
+            $("#changeButton").click(function(e){
+                                                                 
+        //       let id = books["id"]
+               
+                window.location.replace("/view/" + id)
+                let title = $.trim($("#new_title").val())
+                let author = $.trim($("#new_author").val())
+                let year = $.trim($("#new_year").val())
+                let summary = $.trim($("#new_summary").val())
+                let score = $.trim($("#new_score").val())
+                let pages = $.trim($("#new_pages").val())
+                let image = $.trim($("#new_image").val())
+                let similar = $.trim($("#new_similar").val()).split(",")
+                let alt = $.trim($("#new_alt").val())
+                
+                
+            
+                let data_to_send = {
+                    "id": id,
+                    "title": title,
+                    "author":author,
+                    "year": year,
+                    "summary": summary,
+                    "alt": alt,
+                    "score": score,
+                    "pages": pages,
+                    "image": image,
+                    "similar": similar
+                }
+                $.ajax({
+                    type: "POST",
+                    url: "/new_edit",
+                    cache: false,
+                    dataType: "json",
+                    contentType: "application/json; charset=utf-8",
+                    data : JSON.stringify(data_to_send),
+                    success:function(result){
+                 //     console.log(similar)
+                 console.log(id)
+                        window.location.replace("/view/" + id)
+                    },
+                    error: function(request, status, error){
+                //        alert("yo")
+                        console.log("Error");
+                        console.log(request)
+                        console.log(status)
+                        console.log(error)
+                    }
+                        
+                    })
+                  })
+            }) 
+        
+            </script>
+    
+
+
+{% endblock %}
+
+

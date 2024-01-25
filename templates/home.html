@@ -1,0 +1,33 @@
+{% extends "layout.html" %} {% block content %}
+<script
+  type="text/javascript"
+  src="{{ url_for('static', filename = 'search_results.js') }}"
+></script>
+<script>
+  let books = {{books|tojson}}
+
+    $(document).ready(function(){
+        let row= $("<div class='row'>")
+        $.each(books, function(i, item){
+            let popular_book = $("<div class='popular_book'>")
+                let col= $("<div class='col-12'>")
+             $(col).append("<div class='row'>" + item["title"] + "</div>" + "<div class='row'>" +item["author"] + "</div>" + "<div class='row'>" +"<img src = '" + item['image'] +  "' 'alt = " + item['alt'] + "'/>" + "</div>")
+                $(popular_book).append(col)
+                $(popular_book).click(function(e){
+                    let item_id = item["id"]
+                    window.location.href = "view/" + item_id;
+                })
+                $(row).append(popular_book)
+                $("#most_popular_container").append(row)
+
+        })
+    });
+</script>
+
+<div class="title">
+  <b>Most Popular Books :</b>
+
+  <div id="most_popular_container"></div>
+</div>
+
+{% endblock %}
